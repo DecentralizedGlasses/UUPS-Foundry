@@ -6,16 +6,14 @@ import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/Own
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
-
-
 // storage is stored in the proxy, NOT the implementation
 // Proxy (borrowing funcs) -> implementation
 
-// proxy -> deploy implementation -> call some "Initializer" function 
+// proxy -> deploy implementation -> call some "Initializer" function
 
 contract BoxV1 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     uint256 internal number;
-    
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -35,7 +33,6 @@ contract BoxV1 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         return 1;
     }
 
-    function _authorizeUpgrade(address newImplementation) internal override onlyOwner{}
-    
+    function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 }
 

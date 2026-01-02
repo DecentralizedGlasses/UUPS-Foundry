@@ -9,14 +9,15 @@ import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/U
 contract BoxV2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     uint256 internal number;
 
-    function initialize() public initializer{
+    function initialize() public initializer {
         __Ownable_init();
         // __UUPSUpgradeable_init();
     }
+
     function setNumber(uint256 _number) external {
         number = _number;
     }
-    
+
     function getNumber() external view returns (uint256) {
         return number;
     }
@@ -26,6 +27,5 @@ contract BoxV2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     }
 
     function _authorizeUpgrade(address newImplementation) internal override {}
-    
 }
 

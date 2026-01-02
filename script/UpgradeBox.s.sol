@@ -19,13 +19,13 @@ contract UpgradeBox is Script {
         return proxy;
     }
 
-    function upgradeBox(address proxyAddress, address newBox) public returns(address){
+    function upgradeBox(address proxyAddress, address newBox) public returns (address) {
         vm.startBroadcast();
         BoxV1 proxy = BoxV1(proxyAddress);
         // this is delegate call
         proxy.upgradeTo(address(newBox)); // proxy contract now points to this new address
         vm.stopBroadcast();
         return address(proxy);
-    } 
+    }
 }
 
