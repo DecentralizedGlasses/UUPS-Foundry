@@ -1,66 +1,96 @@
-## Foundry
+# UUPS-Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project demonstrates the **UUPS (Universal Upgradeable Proxy Standard)** pattern for smart contracts using **Foundry**.
 
-Foundry consists of:
+The goal of this repository is to show how a smart contract can be **upgraded without changing its address or losing stored data**, by using the UUPS proxy pattern.
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+---
 
-## Documentation
+## What is UUPS?
 
-https://book.getfoundry.sh/
+UUPS is an upgradeable smart contract pattern where:
 
-## Usage
+- The **proxy contract** stores all the data
+- The **implementation (logic) contract** contains the upgrade logic
+- Upgrades are controlled from the implementation itself
+- The contract address stays the same after upgrades
 
-### Build
+This approach is more **gas-efficient** and **cleaner** compared to older proxy patterns.
 
-```shell
-$ forge build
+---
+
+## What This Project Demonstrates
+
+- Writing UUPS-compatible smart contracts
+- Deploying contracts using Foundry
+- Upgrading contract logic while keeping the same proxy address
+- Verifying that state is preserved after upgrade
+
+This project is meant for **learning and experimentation**.
+
+---
+
+## Project Structure
+
+├── src/ # Smart contracts (UUPS logic)
+├── script/ # Deployment and upgrade scripts
+├── test/ # Tests for upgrade behavior
+├── foundry.toml
+
+
+---
+
+## Requirements
+
+- Foundry
+- Solidity ^0.8.x
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/DecentralizedGlasses/UUPS-Foundry.git
+cd UUPS-Foundry
 ```
 
-### Test
-
-```shell
-$ forge test
+#### Install Foundry (if not installed):
+```bash
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 ```
 
-### Format
-
-```shell
-$ forge fmt
+#### Build Contracts
+```bash
+forge build
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
+#### Run Tests
+```bash 
+forge test
 ```
+##### Tests verify that:
 
-### Anvil
+- The contract works before upgrade
+- The implementation can be upgraded
+- State remains unchanged after upgrade
 
-```shell
-$ anvil
-```
+##### Why UUPS?
+- Lower gas cost than Transparent Proxy
+- Clear separation of storage and logic
+- Upgrade control lives in the implementation
+- Widely used in production systems
 
-### Deploy
+#### Disclaimer
+This project is for educational purposes only.
+Do not use directly in production without proper audits.
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+#### License
 
-### Cast
+MIT
 
-```shell
-$ cast <subcommand>
-```
+#### Author
 
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Sivaji (DecentralizedGlasses)
